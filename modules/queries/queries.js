@@ -34,4 +34,17 @@
 
 
 
+// db.test.find({ interests: "Cooking" }).project({ interests: 1 })
+// db.test.find({ "interests.2": "Cooking" }).project({ interests: 1 })
+// db.test.find({ interests: { $all: ["Travelling", "Reading", "Cooking"] } }).project({ interests: 1 })
+// db.test.find({ "skills.name": "JAVASCRIPT" }).project({ skills: 1 })
+// db.test.find({ 
+//     skills: { $elemMatch: {
+//         name: "JAVASCRIPT",
+//         level: "Intermidiate"
+//     }}    
+// }).project({ skills: 1 })
+
+
+
 // db.test.find()
