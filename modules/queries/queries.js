@@ -20,4 +20,18 @@
 // },
 //     { age: 1, gender: 1, interests: 1 }).sort({ age: 1 })
 
+
+
+
+// db.test.find({ age: { $exists: true } })
+// db.test.find({ company: { $exists: false } })
+// db.test.find({ age: { $type: "string" } })
+// db.test.find({ age: { $type: "number" } })
+// db.test.find({ friends: { $type: "array" } })
+// db.test.find({ friends: { $size: 4 } }).project({ friends: 1 })
+// db.test.find({ friends: { $size: 0 } }).project({ friends: 1 })
+// db.test.find({ company: { $type: "null" } }).project({ company: 1 })
+
+
+
 // db.test.find()
