@@ -46,5 +46,31 @@
 // }).project({ skills: 1 })
 
 
+// db.test.find({_id: ObjectId("6406ad63fc13ae5a40000065")})
+// db.test.updateOne(
+//     { _id: ObjectId("6406ad63fc13ae5a40000065") },
+//     {
+//         $set: {
+//             age: 85
+//         }
+//     }
+// )
+// db.test.updateOne(
+//     { _id: ObjectId("6406ad63fc13ae5a40000065") },
+//     {
+//         $addToSet: {
+//             interests: { $each: ["Gaming, Driving, Cooking"] }
+//         }
+//     }
+// )
+// db.test.updateOne(
+//     { _id: ObjectId("6406ad63fc13ae5a40000065") },
+//     {
+//         $push: {
+//             interests: { $each: ["Gaming, Driving, Cooking"] }
+//         }
+//     }
+// )
+
 
 // db.test.find()
