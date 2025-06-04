@@ -100,6 +100,30 @@
 // )
 
 
+// db.test.updateOne(
+//     { _id: ObjectId("6406ad63fc13ae5a40000066") },
+//     {
+//         $set: {
+//             "address.city": "Dhaka",
+//             "address.country": "BD",
+//             "address.postalCode": "1216"
+//         }
+//     }
+
+// )
+
+
+
+// db.test.updateOne(
+//     { _id: ObjectId("6406ad63fc13ae5a40000066"), "education.major": "Philosophy" },
+//     {
+//         $set: {
+//             "education.$.major": "CSE"
+//         }
+//     }
+
+// )
+
 
 
 
