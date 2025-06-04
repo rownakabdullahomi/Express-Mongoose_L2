@@ -73,4 +73,40 @@
 // )
 
 
+
+// db.test.updateOne(
+//     { _id: ObjectId("6406ad63fc13ae5a40000065") },
+//     { $unset: { birthday: "" } }
+// )
+// db.test.updateOne(
+//     { _id: ObjectId("6406ad63fc13ae5a40000065") },
+//     { $unset: { age: 1 } }
+// )
+// db.test.updateOne(
+//     { _id: ObjectId("6406ad63fc13ae5a40000065") },
+//     { $pop: { languages: -1 } }
+// )
+// db.test.updateOne(
+//     { _id: ObjectId("6406ad63fc13ae5a40000066") },
+//     { $pull: { friends: "Nahid Hasan Bulbul" } }
+// )
+// db.test.updateOne(
+//     { _id: ObjectId("6406ad63fc13ae5a40000066") },
+//     { $pull: { languages: "Assamese" } }
+// )
+// db.test.updateOne(
+//     { _id: ObjectId("6406ad63fc13ae5a40000066") },
+//     { $pullAll: { friends: ["Fahim Ahammed Firoz", "Tanmoy Parvez"] } }
+// )
+
+
+
+
+
+
+
+
+
+
+
 // db.test.find()
