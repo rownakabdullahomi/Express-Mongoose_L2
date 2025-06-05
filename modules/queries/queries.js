@@ -126,6 +126,17 @@
 
 
 
+// db.test.deleteOne({ _id: ObjectId("6406ad63fc13ae5a40000066")})
+
+// db.createCollection("posts")
+
+
+// db.posts.insertOne({test: "I am testing"})
+
+// db.posts.drop({ writeConcern: {w: 1 })
+
+
+
 
 
 
