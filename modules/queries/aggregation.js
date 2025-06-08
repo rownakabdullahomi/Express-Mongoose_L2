@@ -111,3 +111,35 @@ db.test.aggregate([
         $group: { _id: "$age", interestsPerAge: { $push: "$interests" } }
     }
 ])
+
+// ------------------------------ $bucket --------------------------------------
+
+db.test.aggregate([
+    // stage 1
+    {
+        $bucket: {
+            groupBy: "$age",
+            boundaries: [20, 40, 60, 80],
+            default: "80 er uporer gula",
+            output: {
+                "count": { $sum: 1 },
+                "karakaraase": { $push: "$name" }
+            }
+        }
+    },
+    // stage 2
+    {
+        $sort: { count: -1 }
+    },
+    // stage 3
+    {
+        $limit: 4
+    },
+    // stage 4
+    {
+        $project: {
+            count: -1
+        }
+    }
+
+])
