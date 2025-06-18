@@ -8,6 +8,7 @@ import {
 import validator from "validator";
 import { number } from "zod";
 import bcrypt from "bcryptjs";
+import { Note } from "./notes.model";
 
 const addressSchema = new Schema<IAddress>(
   {
@@ -89,12 +90,23 @@ userSchema.static("hashPassword", async function (plainPassword: string) {
   return password;
 });
 
+userSchema.post("findOneAndDelete", async function (doc) {
+  if(doc){
+    await Note.deleteMany({ user: doc._id });
+  }
+});
+
+userSchema.pre("find", function(next){
+  console.log("Inside find");
+  next();
+})
+
 userSchema.pre("save", async function () {
   this.password = await bcrypt.hash(this.password, 10);
 });
 
-userSchema.post("save", async function(doc){
+userSchema.post("save", async function (doc) {
   console.log(`Data is: ${doc}`);
-})
+});
 
 export const User = model<IUser, UserStaticMethods>("User", userSchema);
