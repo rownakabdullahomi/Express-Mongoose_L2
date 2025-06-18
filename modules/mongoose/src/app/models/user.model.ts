@@ -77,6 +77,8 @@ const userSchema = new Schema<IUser, UserStaticMethods, UserInstanceMethods>(
   {
     versionKey: false,
     timestamps: true,
+    toJSON: { virtuals: true },
+    toObject: { virtuals: true },
   }
 );
 
@@ -91,15 +93,15 @@ userSchema.static("hashPassword", async function (plainPassword: string) {
 });
 
 userSchema.post("findOneAndDelete", async function (doc) {
-  if(doc){
+  if (doc) {
     await Note.deleteMany({ user: doc._id });
   }
 });
 
-userSchema.pre("find", function(next){
+userSchema.pre("find", function (next) {
   console.log("Inside find");
   next();
-})
+});
 
 userSchema.pre("save", async function () {
   this.password = await bcrypt.hash(this.password, 10);
@@ -107,6 +109,10 @@ userSchema.pre("save", async function () {
 
 userSchema.post("save", async function (doc) {
   console.log(`Data is: ${doc}`);
+});
+
+userSchema.virtual("fullName").get(function () {
+  return `${this.firstName} ${this.lastName}`;
 });
 
 export const User = model<IUser, UserStaticMethods>("User", userSchema);
