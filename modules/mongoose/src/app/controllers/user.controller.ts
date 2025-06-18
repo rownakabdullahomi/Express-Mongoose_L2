@@ -19,14 +19,19 @@ usersRoutes.post("/create-user", async (req: Request, res: Response) => {
     // const zodBody = await CreateUserZodSchema.parseAsync(req.body);
     const body = req.body;
 
-    const password = await bcrypt.hash(body.password, 10);
+    // const password = await bcrypt.hash(body.password, 10);
     // console.log(password);
 
-    body.password = password
+    // body.password = password
 
     // const user = await User.create(body);
 
     const user = new User(body);
+
+    const password = await user.hashPassword(body.password);
+
+    user.password = password;
+
     await user.save();
 
     res.status(201).json({
