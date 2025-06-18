@@ -22,14 +22,11 @@ usersRoutes.post("/create-user", async (req: Request, res: Response) => {
     // const password = await bcrypt.hash(body.password, 10);
     // body.password = password
 
-
     // static method.... it is better**
     // const password =await User.hashPassword(body.password)
     // body.password = password;
-    
-    const user = await User.create(body);
-    
 
+    const user = await User.create(body);
 
     // instance methods
     // const user = new User(body);
@@ -44,16 +41,30 @@ usersRoutes.post("/create-user", async (req: Request, res: Response) => {
     });
   } catch (error: any) {
     console.log(error);
-     res.status(400).json({
+    res.status(400).json({
       success: false,
       message: `Error occured. ${error.message}`,
-      error
+      error,
     });
   }
 });
 
 usersRoutes.get("/", async (req: Request, res: Response) => {
-  const users = await User.find();
+  const userEmail = req.query.email;
+  console.log(userEmail);
+  let users = [];
+
+  // sorting
+  // users = await User.find().sort({"email": "asc"})
+  // users = await User.find().sort({"email": "desc"})
+  // users = await User.find().sort({"email": 1})
+  // users = await User.find().sort({"email": -1})
+
+  // skipping
+  // users = await User.find().skip(2)
+
+  // limiting
+  users = await User.find().limit(2)
 
   res.status(201).json({
     success: true,
@@ -88,7 +99,7 @@ usersRoutes.patch("/:userId", async (req: Request, res: Response) => {
 usersRoutes.delete("/:userId", async (req: Request, res: Response) => {
   const userId = req.params.userId;
   // const user = await User.findByIdAndDelete(userId);
-  const user = await User.findOneAndDelete({_id: userId});
+  const user = await User.findOneAndDelete({ _id: userId });
 
   res.status(201).json({
     success: true,
