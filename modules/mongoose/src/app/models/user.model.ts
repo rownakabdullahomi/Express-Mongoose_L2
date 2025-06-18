@@ -1,8 +1,13 @@
 import { Model, model, Schema } from "mongoose";
-import { IAddress, IUser, UserInstanceMethods, UserStaticMethods } from "../interfaces/user.interface";
+import {
+  IAddress,
+  IUser,
+  UserInstanceMethods,
+  UserStaticMethods,
+} from "../interfaces/user.interface";
 import validator from "validator";
 import { number } from "zod";
-import  bcrypt from 'bcryptjs';
+import bcrypt from "bcryptjs";
 
 const addressSchema = new Schema<IAddress>(
   {
@@ -74,14 +79,22 @@ const userSchema = new Schema<IUser, UserStaticMethods, UserInstanceMethods>(
   }
 );
 
-userSchema.method("hashPassword", async function(plainPassword: string){
-const password = await bcrypt.hash(plainPassword, 10);
-return password
-})
+userSchema.method("hashPassword", async function (plainPassword: string) {
+  const password = await bcrypt.hash(plainPassword, 10);
+  return password;
+});
 
-userSchema.static("hashPassword", async function(plainPassword: string){
-const password = await bcrypt.hash(plainPassword, 10);
-return password
+userSchema.static("hashPassword", async function (plainPassword: string) {
+  const password = await bcrypt.hash(plainPassword, 10);
+  return password;
+});
+
+userSchema.pre("save", async function () {
+  this.password = await bcrypt.hash(this.password, 10);
+});
+
+userSchema.post("save", async function(doc){
+  console.log(`Data is: ${doc}`);
 })
 
 export const User = model<IUser, UserStaticMethods>("User", userSchema);
