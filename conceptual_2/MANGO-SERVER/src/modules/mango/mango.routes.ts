@@ -8,5 +8,6 @@ mangoRoutes.post("/", mangoController.createMango);
 mangoRoutes.get("/", mangoController.getMangoes);
 mangoRoutes.get("/:id", mangoController.getMangoById);
 mangoRoutes.patch("/:id", mangoController.updateMango);
+mangoRoutes.delete("/:id", mangoController.deleteMango);
 
 export default mangoRoutes;

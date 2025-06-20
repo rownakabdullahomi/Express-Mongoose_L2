@@ -80,11 +80,29 @@ const updateMango = async (req: Request, res: Response) => {
   }
 };
 
+const deleteMango = async (req: Request, res: Response) => {
+  try {
+    const id = req.params.id;
+    const mango = await Mango.findByIdAndDelete(id);
 
+    res.status(200).json({
+      success: true,
+      message: "Mango deleted successfully",
+      data: mango,
+    });
+  } catch (error) {
+    res.json({
+      success: false,
+      message: "Error happened",
+      error,
+    });
+  }
+};
 
 export const mangoController = {
   createMango,
   getMangoes,
   getMangoById,
-  updateMango
+  updateMango,
+  deleteMango
 };
