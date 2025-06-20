@@ -10,8 +10,8 @@ const orderAddressSchema = new Schema({
 });
 
 const orderSchema = new Schema<IOrder>({
-  user: { type: Schema.Types.ObjectId, required: true },
-  mango: { type: Schema.Types.ObjectId, required: true },
+  user: { type: Schema.Types.ObjectId, ref:"User", required: true },
+  mango: { type: Schema.Types.ObjectId, ref:"Mango", required: true },
   quantity: { type: Number, min: 0, required: true },
   totalPrice: { type: Number, min: 0},
   status: { type: String, required: true },
@@ -31,6 +31,13 @@ orderSchema.pre("save", async function () {
   if (!mango) throw new Error("Mango not found.");
   this.totalPrice = (mango.price as number) * this.quantity;
 });
+
+// orderSchema.post("save", function(doc, next){
+//     console.log(`doc from post --> ${doc}`);
+//     const plainAddress= `${doc.address.street}, ${doc.address.state}, ${doc.address.zipCode}, ${doc.address.country}`;
+//     doc.address = plainAddress
+//     next();
+// })
 
 const Order = model<IOrder>("Order", orderSchema);
 export default Order;

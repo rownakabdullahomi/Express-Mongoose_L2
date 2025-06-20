@@ -12,7 +12,7 @@ const createOrder = async (req: Request, res: Response) => {
 };
 
 const getOrders = async (req: Request, res: Response) => {
-  const order = await Order.find();
+  const order = await Order.find().populate("user").populate("mango");
 
   res.status(200).json({
     success: true,
