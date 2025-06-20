@@ -37,7 +37,54 @@ const getMangoes = async (req: Request, res: Response) => {
   }
 };
 
+const getMangoById = async (req: Request, res: Response) => {
+  try {
+    const id = req.params.id
+    const mango = await Mango.findById(id);
+
+    res.status(200).json({
+      success: true,    
+      message: "Mango get successfully",
+      data: mango,
+    });
+  } catch (error) {
+    res.json({
+      success: false,
+      message: "Error happened",
+      error,
+    });
+  }
+};
+
+
+const updateMango = async (req: Request, res: Response) => {
+  try {
+    const id = req.params.id;
+    const body = req.body;
+    const mango = await Mango.findByIdAndUpdate(id, body, {
+        new: true,
+        runValidators: true
+    });
+
+    res.status(200).json({
+      success: true,    
+      message: "Mango updated successfully",
+      data: mango,
+    });
+  } catch (error) {
+    res.json({
+      success: false,
+      message: "Error happened",
+      error,
+    });
+  }
+};
+
+
+
 export const mangoController = {
   createMango,
   getMangoes,
+  getMangoById,
+  updateMango
 };
